@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Allocation with Time Slots</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: rgb(232, 211, 231);
+        }
+
+        .lab-box {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 320px;
+        }
+
+        .lab-name {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .counter {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        .btn-container {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-around; /* Align buttons side by side */
+        }
+
+        .alert {
+            margin-top: 10px;
+        }
+
+        .time-slot {
+            font-size: 1em;
+            margin: 10px 0;
+        }
+
+        .row {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Lab 1 -->
+            <div class="col-md-3">
+                <div class="lab-box" id="box1">
+                    <div class="lab-name">Cloud Lab</div>
+                    <div class="counter" id="counter1">0/32</div>
+                    <select class="form-control time-slot" id="timeSlot1">
+                        <option value="">Select Time Slot</option>
+                        <option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
+                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                    </select>
+                    <div class="btn-container">
+                        <button class="btn btn-success" onclick="allocateLab('counter1', 'timeSlot1')">Allocate</button>
+                        <button class="btn btn-danger" onclick="withdrawLab('counter1')">Withdraw</button>
+                    </div>
+                    <div id="alert1"></div>
+                </div>
+            </div>
+
+            <!-- Lab 2 -->
+            <div class="col-md-3">
+                <div class="lab-box" id="box2">
+                    <div class="lab-name">Cognitive Lab</div>
+                    <div class="counter" id="counter2">0/32</div>
+                    <select class="form-control time-slot" id="timeSlot2">
+                        <option value="">Select Time Slot</option>
+                        <option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
+                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                    </select>
+                    <div class="btn-container">
+                        <button class="btn btn-success" onclick="allocateLab('counter2', 'timeSlot2')">Allocate</button>
+                        <button class="btn btn-danger" onclick="withdrawLab('counter2')">Withdraw</button>
+                    </div>
+                    <div id="alert2"></div>
+                </div>
+            </div>
+
+            <!-- Lab 3 -->
+            <div class="col-md-3">
+                <div class="lab-box" id="box3">
+                    <div class="lab-name">IoT Lab</div>
+                    <div class="counter" id="counter3">0/32</div>
+                    <select class="form-control time-slot" id="timeSlot3">
+                        <option value="">Select Time Slot</option>
+                        <option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
+                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                    </select>
+                    <div class="btn-container">
+                        <button class="btn btn-success" onclick="allocateLab('counter3', 'timeSlot3')">Allocate</button>
+                        <button class="btn btn-danger" onclick="withdrawLab('counter3')">Withdraw</button>
+                    </div>
+                    <div id="alert3"></div>
+                </div>
+            </div>
+
+            <!-- Lab 4 -->
+            <div class="col-md-3">
+                <div class="lab-box" id="box4">
+                    <div class="lab-name">Motorola Lab</div>
+                    <div class="counter" id="counter4">0/32</div>
+                    <select class="form-control time-slot" id="timeSlot4">
+                        <option value="">Select Time Slot</option>
+                        <option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
+                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                    </select>
+                    <div class="btn-container">
+                        <button class="btn btn-success" onclick="allocateLab('counter4', 'timeSlot4')">Allocate</button>
+                        <button class="btn btn-danger" onclick="withdrawLab('counter4')">Withdraw</button>
+                    </div>
+                    <div id="alert4"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Row for Labs 5 to 7 -->
+        <div class="row justify-content-center">
+            <!-- Lab 5 -->
+            <div class="col-md-4">
+                <div class="lab-box" id="box5">
+                    <div class="lab-name">ML Lab</div>
+                    <div class="counter" id="counter5">0/32</div>
+                    <select class="form-control time-slot" id="timeSlot5">
+                        <option value="">Select Time Slot</option>
+                        <option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
+                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                    </select>
+                    <div class="btn-container">
+                        <button class="btn btn-success" onclick="allocateLab('counter5', 'timeSlot5')">Allocate</button>
+                        <button class="btn btn-danger" onclick="withdrawLab('counter5')">Withdraw</button>
+                    </div>
+                    <div id="alert5"></div>
+                </div>
+            </div>
+
+            <!-- Lab 6 -->
+            <div class="col-md-4">
+                <div class="lab-box" id="box6">
+                    <div class="lab-name">DA Lab</div>
+                    <div class="counter" id="counter6">0/32</div>
+                    <select class="form-control time-slot" id="timeSlot6">
+                        <option value="">Select Time Slot</option>
+                        <option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
+                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                    </select>
+                    <div class="btn-container">
+                        <button class="btn btn-success" onclick="allocateLab('counter6', 'timeSlot6')">Allocate</button>
+                        <button class="btn btn-danger" onclick="withdrawLab('counter6')">Withdraw</button>
+                    </div>
+                    <div id="alert6"></div>
+                </div>
+            </div>
+
+            <!-- Lab 7 -->
+            <div class="col-md-4">
+                <div class="lab-box" id="box7">
+                    <div class="lab-name">Mobile Application Lab</div>
+                    <div class="counter" id="counter7">0/32</div>
+                    <select class="form-control time-slot" id="timeSlot7">
+                        <option value="">Select Time Slot</option>
+                        <option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
+                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                    </select>
+                    <div class="btn-container">
+                        <button class="btn btn-success" onclick="allocateLab('counter7', 'timeSlot7')">Allocate</button>
+                        <button class="btn btn-danger" onclick="withdrawLab('counter7')">Withdraw</button>
+                    </div>
+                    <div id="alert7"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        var allocatedTimeSlots = {};
+
+        // Lab allocation function
+        function allocateLab(counterId, timeSlotId) {
+            var counter = document.getElementById(counterId);
+            var timeSlot = document.getElementById(timeSlotId);
+            var alertMessage = document.getElementById("alert" + counterId.charAt(counterId.length - 1));
+            var currentCount = parseInt(counter.innerHTML.split('/')[0]);
+            var selectedTimeSlot = timeSlot.value;
+
+            if (selectedTimeSlot) {
+                // Check if the time slot is already allocated in another lab
+                if (allocatedTimeSlots[selectedTimeSlot]) {
+                    alertMessage.innerHTML = "<div class='alert alert-danger'>This time slot is already booked in another lab.</div>";
+                } else {
+                    // Allocate the lab if not already full
+                    if (currentCount < 32) {
+                        counter.innerHTML = (currentCount + 1) + "/32";
+                        allocatedTimeSlots[selectedTimeSlot] = true; // Mark the time slot as allocated
+                        alertMessage.innerHTML = "<div class='alert alert-success'>Lab slot allocated for " + selectedTimeSlot + "!</div>";
+                    } else {
+                        alertMessage.innerHTML = "<div class='alert alert-danger'>Lab is fully allocated.</div>";
+                    }
+                }
+            } else {
+                alertMessage.innerHTML = "<div class='alert alert-warning'>Please select a time slot.</div>";
+            }
+        }
+
+        // Lab withdrawal function
+        function withdrawLab(counterId) {
+            var counter = document.getElementById(counterId);
+            var alertMessage = document.getElementById("alert" + counterId.charAt(counterId.length - 1));
+            var currentCount = parseInt(counter.innerHTML.split('/')[0]);
+            var timeSlotId = "timeSlot" + counterId.charAt(counterId.length - 1);
+            var timeSlot = document.getElementById(timeSlotId);
+            var selectedTimeSlot = timeSlot.value;
+
+            if (currentCount > 0 && selectedTimeSlot) {
+                counter.innerHTML = (currentCount - 1) + "/32";
+                delete allocatedTimeSlots[selectedTimeSlot]; // Mark the time slot as available
+                alertMessage.innerHTML = "<div class='alert alert-warning'>Lab slot withdrawn.</div>";
+            } else {
+                alertMessage.innerHTML = "<div class='alert alert-danger'>No allocations to withdraw or time slot not selected.</div>";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
